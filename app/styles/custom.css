@@ -1,0 +1,50 @@
+/* Override Bootstrap min-height for navbar */
+#unseenGloryNavigationBar {
+	min-height: 20px;
+	color: #FFFFFF
+}
+
+.unseen-glory-title {
+	font-family: 'Julius Sans One', sans-serif;
+	font-size: 30px;
+	float: none;
+	font-size: 30px;
+	text-align: center
+}
+
+.unseen-glory-text-container {
+	display: inline-block
+}
+
+.unseen-glory-text-container:hover {
+	cursor: pointer
+}
+
+.unseen-glory-blue {
+	color: #000082
+}
+
+.unseen-glory-green {
+	color: #00aa00
+}
+
+.unseen-glory-orange {
+	color: #ff6600
+}
+
+.navigation-arrow {
+	vertical-align: middle;
+	color: #FFFFFF
+}
+
+.navigation-arrow:hover {
+	cursor: pointer
+}
+
+.navigation-arrow-left:hover {
+	color: #000082
+}
+
+.navigation-arrow-right:hover {
+	color: #ff6600;
+}
