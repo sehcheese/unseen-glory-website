@@ -4,12 +4,23 @@
 	color: #FFFFFF
 }
 
+#poemListIcon {
+	cursor: pointer;
+	color: #FFFFFF
+}
+
+.navbar-brand
+{
+    position: absolute;
+    width: 100%;
+    left: 0;
+    text-align: center;
+    margin: auto;
+}
+
 .unseen-glory-title {
 	font-family: 'Julius Sans One', sans-serif;
 	font-size: 30px;
-	float: none;
-	font-size: 30px;
-	text-align: center
 }
 
 .unseen-glory-text-container {
@@ -20,15 +31,17 @@
 	cursor: pointer
 }
 
-.unseen-glory-blue {
-	color: #000082
+.unseen-glory-blue,
+.navigation-arrow-left:hover {
+	color: #2E9AFE
 }
 
 .unseen-glory-green {
 	color: #00aa00
 }
 
-.unseen-glory-orange {
+.unseen-glory-orange,
+.navigation-arrow-right:hover {
 	color: #ff6600
 }
 
@@ -41,10 +54,22 @@
 	cursor: pointer
 }
 
-.navigation-arrow-left:hover {
-	color: #000082
+#tableOfContents {
+	margin-top: 31px;
+	background-color: #222
 }
 
-.navigation-arrow-right:hover {
-	color: #ff6600;
+.content {
+	margin-top: 50px
+}
+
+.poem-link-list {
+	background-color: #222
+}
+
+li.poem-link {
+	border: none; /* Override Bootstrap list group border */
+	font-family: 'Julius Sans One', sans-serif;
+	background-color: #222;
+	color: white
 }
