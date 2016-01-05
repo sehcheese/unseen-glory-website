@@ -71,5 +71,6 @@ li.poem-link {
 	border: none; /* Override Bootstrap list group border */
 	font-family: 'Julius Sans One', sans-serif;
 	background-color: #222;
-	color: white
+	color: white;
+	cursor: pointer
 }
