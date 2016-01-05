@@ -117,13 +117,28 @@ $(function() {
 	});
 	
 	$('.poem-link').click(function(event) {
+		// Get the poem key
 		var poemKey = $(event.target).attr('data-key');
 		
+		// Update the linking location
 		window.location.hash = poemKey;
 		
-		$('#poemTitle').html(poems[poemKey].title);
-		$('#poemText').html(poems[poemKey].text);
+		// Fade out old title, fade in new title
+		$('#poemTitle').fadeOut(600, function() {
+			$('#poemTitle').html(poems[poemKey].title);
+			
+			$('#poemTitle').fadeIn(1000);
+		});
 		
+		// Fade out old poem text, fade in new poem text
+		$('#poemText').fadeOut(600, function() {
+			$('#poemText').html(poems[poemKey].text);
+			
+			$('#poemText').fadeIn(1000);
+		});
+		
+		// Hide the table of contents and scroll to the top
 		$('#tableOfContents').collapse('hide');
+		document.body.scrollTop = document.documentElement.scrollTop = 0;
 	});
 });
