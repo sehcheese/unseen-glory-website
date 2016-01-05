@@ -74,3 +74,27 @@ li.poem-link {
 	color: white;
 	cursor: pointer
 }
+
+#content {
+	width: 400px;
+	margin: 50px auto;
+}
+
+#poemTitle {
+	text-align: center;
+	font-family: 'Merriweather', serif;
+	font-size: 22px;
+	font-style: italic;
+	margin-bottom: 20px
+}
+
+#poemTextContainer {
+	font-family: 'Merriweather', serif;
+	font-size: 14px;
+	text-align: center
+}
+
+#poemText {
+	display: inline-block;
+	text-align: left
+}
