@@ -123,5 +123,7 @@ $(function() {
 		
 		$('#poemTitle').html(poems[poemKey].title);
 		$('#poemText').html(poems[poemKey].text);
+		
+		$('#tableOfContents').collapse('hide');
 	});
 });
