@@ -23,11 +23,11 @@
 	font-size: 30px;
 }
 
-.unseen-glory-text-container {
+#unseenGloryTextContainer {
 	display: inline-block
 }
 
-.unseen-glory-text-container:hover {
+#unseenGloryTextContainer:hover {
 	cursor: pointer
 }
 
@@ -75,7 +75,18 @@ li.poem-link {
 	cursor: pointer
 }
 
-#content {
+#homeContent {
+	margin: 50px auto;
+	text-align: center;
+	font-family: 'Merriweather', serif;
+	font-size: 14px
+}
+
+.verse {
+	font-style: italic
+}
+
+#poemContent {
 	width: 400px;
 	margin: 50px auto;
 }

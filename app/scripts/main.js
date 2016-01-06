@@ -153,18 +153,15 @@ var activePoemIndex = null;
 
 $(function() {
 	var switchActive = function(poemKey) {
-		// Fade out old title, fade in new title
-		$('#poemTitle').fadeOut(600, function() {
-			$('#poemTitle').html(poems[poemKey].title);
-			
-			$('#poemTitle').fadeIn(1000);
-		});
+		// Hide home content if it was visible
+		$('#homeContent').fadeOut(600);
 		
 		// Fade out old poem text, fade in new poem text
-		$('#poemText').fadeOut(600, function() {
+		$('#poemContent').fadeOut(600, function() {
+			$('#poemTitle').html(poems[poemKey].title);
 			$('#poemText').html(poems[poemKey].text);
 			
-			$('#poemText').fadeIn(1000);
+			$('#poemContent').fadeIn(1000);
 		});
 		
 		activePoemIndex = poems[poemKey].index;
@@ -173,11 +170,23 @@ $(function() {
 		history.pushState({}, '', '?poem=' + poemKey);
 	}
 	
-	// On load, switch to poem key in hash if one present
+	// On load, switch to poem key in parameter if one present
 	var poemUrlParameter = getParameterByName('poem');
 	if(poems.hasOwnProperty(poemUrlParameter)) {
 		switchActive(poemUrlParameter);
 	}
+	
+	// On click of title "UNSEEN GLORY", show home content and hide poem content
+	$('#unseenGloryTextContainer').click(function(event) {
+		$('#poemContent').fadeOut(600, function() {
+			$('#homeContent').fadeIn(1000);
+			
+			activePoemIndex = null;
+			
+			// Update url to homepage
+			history.pushState({}, '', '/');
+		});
+	});
 	
 	var colorClasses = [
 		'#ff6600',
