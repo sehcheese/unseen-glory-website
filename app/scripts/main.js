@@ -1,3 +1,5 @@
+'use strict';
+
 var poems = {
 	'a-prayer': {
 		title: 'A Prayer',
@@ -119,7 +121,7 @@ var poems = {
 		text: 'The shadows, long<br/>inside my soul<br/>dark guilt, despair<br/>this shattered whole<br/><br/>This hollow heart<br/>I dare not sound<br/>for fear of what<br/>may thus be found<br/><br/>I hide my deeds<br/>I\'m not hidden<br/>winter sun gives<br/>light unbidden<br/><br/>Exposing what<br/>my heart does fill<br/>a sinner once<br/>a sinner still<br/><br/>Then deep a voice<br/>resounding strong:<br/>look not upon<br/>yourself too long<br/><br/>But gaze at Him<br/>who knew no sin<br/>humble yourself<br/>and enter in<br/><br/>The prodigal<br/>is now a son<br/>the battle is<br/>already won<br/><br/>Speak not of sin<br/>without His name<br/>shun not His grace<br/>your essence claim<br/><br/>Rejoice in Him<br/>Who knows you well<br/>when shadows cast<br/>His mercy tell<br/><br/>In Christ, the Son<br/>we fearless stand<br/>the night, far gone<br/>the day, at hand',
 		index: 23
 	}
-}
+};
 
 // Impose an order on the poems object
 var poemKeyIndexMap = [
@@ -147,88 +149,95 @@ var poemKeyIndexMap = [
 	'waiting',
 	'waking',
 	'winter-sun'
-]
+];
 
 var activePoemIndex = null;
+
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+    var regex = new RegExp('[\\?&]' + name + '=([^&#]*)'),
+        results = regex.exec(location.search);
+    return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+}
 
 $(function() {
 	var switchActive = function(poemKey) {
 		// Hide home content if it was visible
 		$('#homeContent').fadeOut(600);
-		
+
 		// Fade out old poem text, fade in new poem text
 		$('#poemContent').fadeOut(600, function() {
 			$('#poemTitle').html(poems[poemKey].title);
 			$('#poemText').html(poems[poemKey].text);
-			
+
 			$('#poemContent').fadeIn(1000);
 		});
-		
+
 		activePoemIndex = poems[poemKey].index;
-		
+
 		// Update url so this poem can be linked to
 		history.pushState({}, '', '?poem=' + poemKey);
-	}
-	
+	};
+
 	// On load, switch to poem key in parameter if one present
 	var poemUrlParameter = getParameterByName('poem');
 	if(poems.hasOwnProperty(poemUrlParameter)) {
 		switchActive(poemUrlParameter);
 	}
-	
+
 	// On click of title "UNSEEN GLORY", show home content and hide poem content
-	$('#unseenGloryTextContainer').click(function(event) {
+	$('#unseenGloryTextContainer').click(function() {
 		$('#poemContent').fadeOut(600, function() {
 			$('#homeContent').fadeIn(1000);
-			
+
 			activePoemIndex = null;
-			
+
 			// Update url to homepage
 			history.pushState({}, '', '/');
 		});
 	});
-	
+
 	var colorClasses = [
 		'#ff6600',
 		'#00aa00',
 		'#2E9AFE'
 	];
-	
+
 	// Random color on hover; wish could do this with css class rather than having the colors hard-coded above, but wasn't working
     $('.poem-link, #poemListIcon').hover(function(event){ // Mouse in change to random of three theme colors
 		// Choose a random color
-		var colorClassIndex = Math.floor(Math.random()* colorClasses.length);
-		
+		var colorClassIndex = Math.floor(Math.random() * colorClasses.length);
+
 		// Apply it to the link
 		$(event.target).css('color', colorClasses[colorClassIndex]);
 	},
 	function(event) { // Mouse out change back to white
 		$(event.target).css('color', '#FFF');
 	});
-	
+
 	// On click of poem link switch to that poem
 	$('.poem-link').click(function(event) {
 		// Get the poem key
 		var poemKey = $(event.target).attr('data-key');
-		
+
 		switchActive(poemKey);
-		
+
 		// Hide the table of contents and scroll to the top
 		$('#tableOfContents').collapse('hide');
 		document.body.scrollTop = document.documentElement.scrollTop = 0;
 	});
-	
+
 	// Left arrow navigation - switch to previous poem
-	$('#leftArrow').click(function(event) {
+	$('#leftArrow').click(function() {
 		if(activePoemIndex === null || activePoemIndex === 0) {
 			switchActive(poemKeyIndexMap[poemKeyIndexMap.length - 1]);
 		} else {
 			switchActive(poemKeyIndexMap[activePoemIndex - 1]);
 		}
 	});
-	
+
 	// Right arrow navigation - switch to next poem
-	$('#rightArrow').click(function(event) {
+	$('#rightArrow').click(function() {
 		if(activePoemIndex === null || activePoemIndex === poemKeyIndexMap.length - 1) {
 			switchActive(poemKeyIndexMap[0]);
 		} else {
@@ -236,10 +245,3 @@ $(function() {
 		}
 	});
 });
-
-function getParameterByName(name) {
-    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-        results = regex.exec(location.search);
-    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-}
