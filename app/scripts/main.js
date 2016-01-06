@@ -152,6 +152,33 @@ var poemKeyIndexMap = [
 var activePoemIndex = null;
 
 $(function() {
+	var switchActive = function(poemKey) {
+		// Fade out old title, fade in new title
+		$('#poemTitle').fadeOut(600, function() {
+			$('#poemTitle').html(poems[poemKey].title);
+			
+			$('#poemTitle').fadeIn(1000);
+		});
+		
+		// Fade out old poem text, fade in new poem text
+		$('#poemText').fadeOut(600, function() {
+			$('#poemText').html(poems[poemKey].text);
+			
+			$('#poemText').fadeIn(1000);
+		});
+		
+		activePoemIndex = poems[poemKey].index;
+		
+		// Update url so this poem can be linked to
+		history.pushState({}, '', '?poem=' + poemKey);
+	}
+	
+	// On load, switch to poem key in hash if one present
+	var poemUrlParameter = getParameterByName('poem');
+	if(poems.hasOwnProperty(poemUrlParameter)) {
+		switchActive(poemUrlParameter);
+	}
+	
 	var colorClasses = [
 		'#ff6600',
 		'#00aa00',
@@ -174,9 +201,6 @@ $(function() {
 	$('.poem-link').click(function(event) {
 		// Get the poem key
 		var poemKey = $(event.target).attr('data-key');
-		
-		// Update the linking location
-		window.location.hash = poemKey;
 		
 		switchActive(poemKey);
 		
@@ -202,22 +226,11 @@ $(function() {
 			switchActive(poemKeyIndexMap[activePoemIndex + 1]);
 		}
 	});
-	
-	var switchActive = function(poemKey) {
-		// Fade out old title, fade in new title
-		$('#poemTitle').fadeOut(600, function() {
-			$('#poemTitle').html(poems[poemKey].title);
-			
-			$('#poemTitle').fadeIn(1000);
-		});
-		
-		// Fade out old poem text, fade in new poem text
-		$('#poemText').fadeOut(600, function() {
-			$('#poemText').html(poems[poemKey].text);
-			
-			$('#poemText').fadeIn(1000);
-		});
-		
-		activePoemIndex = poems[poemKey].index;
-	}
 });
+
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
