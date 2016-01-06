@@ -6,7 +6,9 @@
 
 #poemListIcon {
 	cursor: pointer;
-	color: #FFFFFF
+	color: #FFFFFF;
+	margin-top: 15px;
+	float: right
 }
 
 .navbar-brand
@@ -18,9 +20,8 @@
     margin: auto;
 }
 
-.unseen-glory-title {
+#unseenGloryTitle {
 	font-family: 'Julius Sans One', sans-serif;
-	font-size: 30px;
 }
 
 #unseenGloryTextContainer {
@@ -31,8 +32,17 @@
 	cursor: pointer
 }
 
-.unseen-glory-blue,
-.navigation-arrow-left:hover {
+@media screen and (min-width: 1024px){
+    .navigation-arrow-left:hover {
+		color: #2E9AFE
+	}
+	
+	.navigation-arrow-right:hover {
+		color: #ff6600
+	}
+}
+
+.unseen-glory-blue {
 	color: #2E9AFE
 }
 
@@ -40,8 +50,7 @@
 	color: #00aa00
 }
 
-.unseen-glory-orange,
-.navigation-arrow-right:hover {
+.unseen-glory-orange {
 	color: #ff6600
 }
 
@@ -55,7 +64,6 @@
 }
 
 #tableOfContents {
-	margin-top: 50px;
 	background-color: #222
 }
 
@@ -79,7 +87,8 @@ li.poem-link {
 	margin: 50px auto;
 	text-align: center;
 	font-family: 'Merriweather', serif;
-	font-size: 14px
+	font-size: 14px;
+	visibility: hidden /* Start out hidden in case told to go to a specific poem at the beginning */
 }
 
 .verse {
@@ -87,7 +96,7 @@ li.poem-link {
 }
 
 #poemContent {
-	width: 400px;
+	width: 310px;
 	margin: 50px auto;
 }
 
