@@ -183,7 +183,7 @@ $(function() {
 	var poemUrlParameter = getParameterByName('poem');
 	if(poems.hasOwnProperty(poemUrlParameter)) {
 		setTimeout(function() { // Counteract fade in switchActive so #homeContent doesn't flash on the screen right before we switch
-			$('#homeContent').css('visibility', 'visible'); 
+			$('#homeContent').css('visibility', 'visible');
 		}, 600);
 		switchActive(poemUrlParameter);
 	} else {
@@ -215,8 +215,6 @@ $(function() {
 
 		// Apply it to the link
 		$(event.target).css('color', colorClasses[colorClassIndex]);
-		
-		$('body').click();
 	},
 	function(event) { // Mouse out change back to white
 		$(event.target).css('color', '#FFF');
